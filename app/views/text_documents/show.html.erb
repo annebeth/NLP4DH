@@ -1,0 +1,33 @@
+<% provide(:title, "Documents") %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield(:title) %> | NLP4DH</title>
+</head>
+  <body>
+    <h1><%= yield(:title) %></h1>
+  </body>
+  <table class = "table table-bordered table-striped">
+     <!-- <thead>
+        <tr>
+           <th> Header </th>
+        </tr>
+     </thead> -->
+
+     <tbody>
+       <tr>
+         <td>File name</td>
+         <td><%= @text_document.file_name %></td>
+        </tr>
+       <tr>
+         <td>Description</td>
+         <td><%= @text_document.description %></td>
+       </tr>
+       <tr>
+         <td>Text</td>
+         <td><%= simple_format @text_document.file_content %></td>
+       </tr>
+     </tbody>
+
+  </table>
+</html>

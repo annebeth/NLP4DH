@@ -1,11 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  file_name: MyString
-  description: MyText
-  file_content: MyText
+  file_name: file_one
+  description: This is the first file.
+  file_content: The first file is a long text.
+  created_at: <%= 10.minutes.ago %>
 
-two:
-  file_name: MyString
-  description: MyText
-  file_content: MyText
+most_recent:
+  file_name: file_two
+  description: This is the second file.
+  file_content: Another long text in this file.
+  created_at: <%= 1.minute.ago %>

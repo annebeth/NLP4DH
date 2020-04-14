@@ -1,0 +1,29 @@
+<% provide(:title, "Documents") %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield(:title) %> | NLP4DH</title>
+</head>
+  <body>
+    <% if !@text_document.errors.empty? %>
+    <div class = "alert alert-error">
+      <ul>
+         <% @text_document.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+         <% end %>
+      </ul>
+
+    </div>
+    <% end %>
+
+    <div class = "well">
+       <%= form_with model: @text_document do |f| %>
+          <%= f.label :textfile %>
+          <%= f.file_field :textfile %>
+          <%= f.label :description %>
+          <%= f.text_field :description %>
+          <%= f.submit "Save", class: "btn btn-primary" %>
+       <% end %>
+    </div>
+  </body>
+</html>
