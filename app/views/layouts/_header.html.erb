@@ -1,12 +1,23 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <%= link_to "NLP4DH", root_path, id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",   root_path %></li>
-        <li><%= link_to "Documentation",   documentation_path %></li>
-        <li><%= link_to "About", about_path %></li>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <%= link_to "NLP4DH", root_path, id: "logo", class: "navbar-brand" %>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav navbar-right ml-auto">
+        <!-- TODO: Add a system for nav-item active here. -->
+        <!-- <li class="nav-item active"> -->
+        <li class="nav-item">
+          <%= link_to "Home", root_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Texts", text_documents_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Documentation", documentation_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "About", about_path, class: "nav-link" %>
+        </li>
       </ul>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </header>

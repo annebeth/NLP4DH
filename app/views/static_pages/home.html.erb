@@ -1,4 +1,27 @@
-<h1>NLP4DH</h1>
-<p>
-  This is the home page. This is where the upload button will be.
-</p>
+<main role="main">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">NLP4DH</h1>
+      <h2>Natural Language Processing for the Digital Humanities</h2>
+      <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+      <hr class="my-4">
+      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+      <%= link_to "Try it out!", text_documents_path, class: "btn btn-primary btn-lg", role: "button" %>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row" id="info-row">
+      <div class="col-md-4">
+        <h2>NLP4DH</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <%= link_to "Read more", documentation_path, class: "btn btn-secondary btn-md", role: "button" %>
+      </div>
+      <div class="col-md-4">
+        <h2>The team</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <%= link_to "Read more", about_path, class: "btn btn-secondary btn-md", role: "button" %>
+      </div>
+    </div>
+  </div>
+</main>
