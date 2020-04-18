@@ -8,6 +8,9 @@ require("turbolinks").start()
 // require("@rails/activestorage").start()
 require("channels")
 
+// Import custom Javascript.
+require("packs/forms")
+
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
