@@ -23,9 +23,12 @@ class TextDocument < ApplicationRecord
   end
 
   def set_file_content
-    self.file_content = textfile.read.force_encoding('utf-8')
-    # TODO: Figure out how to do these errors.
-    # errors[:textfile] << "should be a plain text file" if ext.downcase != ".txt"
+    content = textfile.read
+    # If we can't read + force encode the file, we don't accept it.
+    if content.force_encoding('utf-8').valid_encoding?
+      self.file_content = content.force_encoding('utf-8')
+    else
+      self.file_content = ""
+    end
   end
-
 end
