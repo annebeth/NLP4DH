@@ -86,7 +86,7 @@
   margin: auto;
 
   .instructions-card {
-    margin: 15px;
+    margin-bottom: 15px;
   }
 }
 
@@ -106,6 +106,12 @@
 }
 
 #text-document-form {
+  margin: auto;
+  margin-top: 15px;
+}
+
+/* errors, flash, etc. */
+#flash-notice {
   margin: auto;
   margin-top: 15px;
 }

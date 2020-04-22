@@ -12,9 +12,10 @@ class TextDocumentsController < ApplicationController
     @text_document = TextDocument.new(text_document_params)
 
     if @text_document.save
-       redirect_to text_documents_path
+       redirect_to text_documents_path, notice: @text_document.file_name + " has been created."
     else
-       render "new"
+      puts @text_document.errors.messages
+      render "new"
     end
   end
 
@@ -25,7 +26,7 @@ class TextDocumentsController < ApplicationController
   def destroy
     @text_document = TextDocument.find(params[:id])
     @text_document.destroy
-    redirect_to text_documents_path
+    redirect_to text_documents_path, alert: @text_document.file_name + " has been destroyed."
   end
 
   private
