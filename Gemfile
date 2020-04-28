@@ -20,19 +20,21 @@ gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+# Use Redis and Resque for background jobs
+gem 'redis', '~> 4.1', '>= 4.1.3'
+gem 'resque', '~> 1.25', '>= 1.25.2'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+gem 'pg', '~> 0.18.4'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
-  gem 'sqlite3', '1.4.1'
   # Call 'byebug' anywhere in the code to stop execution and get a
   # debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -55,10 +57,6 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
-end
-
-group :production do
-  gem 'pg', '1.1.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
