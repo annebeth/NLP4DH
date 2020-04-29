@@ -34,6 +34,6 @@ class TextDocumentsController < ApplicationController
 
   private
     def text_document_params
-      params.require(:text_document).permit(:file_name, :description, :file_content, :textfile)
+      params.require(:text_document).permit(:file_name, :description, :file_content, :annotation, :textfile)
     end
 end
