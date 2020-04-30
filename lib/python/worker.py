@@ -1,9 +1,11 @@
-import os, time
+import os, time, json
 
 import redis
 from rq import Queue
 
 import psycopg2
+
+from annotations import annotate
 
 redis_url = os.getenv('REDIS_URL', 'redis://localhost:6379')
 postgres_url = os.getenv('DATABASE_URL', 'dbname=nlp4dh_development user=postgres')
@@ -27,9 +29,17 @@ if __name__ == '__main__':
                 if "class" in job and job["class"] == "Annotator":
                     text_document_id = job["args"][0]
 
-                    c.execute('''UPDATE text_documents
-                                SET description = 'HA! Got you! :D'
+                    c.execute('''SELECT file_content FROM text_documents
                                 WHERE text_documents.id = %s;''', (text_document_id,))
+                    file_content = c.fetchone()[0]
+                    annotation = annotate(file_content, text_document_id)
+
+                    annotation_json = json.dumps(annotation, indent=4)
+
+                    c.execute('''UPDATE text_documents
+                                SET annotation = %s
+                                WHERE text_documents.id = %s;''',
+                                (annotation_json, text_document_id,))
                     conn.commit()
 
                     # Remove the job from the queue when done.
