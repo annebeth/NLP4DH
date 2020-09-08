@@ -1,0 +1,119 @@
+<%= render 'layouts/flash' %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 analysis-col">
+      <% if @text_document.annotation.empty? %>
+        <div class="alert alert-danger" role="alert">
+          Your file has not been annotated yet. Please wait for a few minutes
+          and then refresh this page. Thank you!
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 analysis-col">
+      <div class="card bg-light mb-3">
+        <div class="card-header">Named Entity Recognition (NER)</div>
+        <div class="card-body">
+          <h5 class="card-title">Counts of top 10 Named Entities</h5>
+          <p class="card-text">The bar chart below shows the top 10 Named Entities in the text document.
+          Bar color corresponds to the category of the entity, for example: person, geographical place, etc.
+          This was obtained by annotating your text document with Spacy's NER-model.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 analysis-col">
+      <!-- Create a div where the graph will take place -->
+      <div id="top_named_entity_viz"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  var data = <%= raw extract_top_10_ner(@text_document.annotation) %>
+  data.sort(function(x, y){
+    return d3.descending(x.count, y.count);
+  })
+
+  // set the dimensions and margins of the graph
+  var margin = {top: 20, right: 130, bottom: 40, left: 150},
+      width = 800 - margin.left - margin.right,
+      height = 450 - margin.top - margin.bottom;
+
+  // append the svg object to the body of the page
+  var svg = d3.select("#top_named_entity_viz")
+    .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .style("display", "block")
+      .style("margin", "auto")
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+  // Add X axis
+  var x = d3.scaleLinear()
+    .domain([0, d3.max(data, function(d) { return d.count; })])
+    .range([ 0, width])
+
+  svg.append("g")
+    .attr("class", "axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x)
+      .ticks(5))
+    .selectAll("text")
+      .style("font-size", 14)
+
+  // Y axis
+  var y = d3.scaleBand()
+    .range([ 0, height ])
+    .domain(data.map(function(d) { return d.text; }))
+    .padding(.1);
+
+  svg.append("g")
+    .call(d3.axisLeft(y))
+    .selectAll("text")
+      .style("font-size", 14)
+
+  var categories = d3.map(data, function(d){return(d.label)}).keys()
+  var labelColor = d3.scaleOrdinal()
+    .domain(categories)
+    .range(["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928"]);
+
+  //Bars
+  svg.selectAll("myRect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", x(0) )
+    .attr("y", function(d) { return y(d.text); })
+    .attr("width", function(d) { return x(d.count); })
+    .attr("height", y.bandwidth() )
+    .attr("fill", function (d) { return labelColor(d.label); })
+
+  // Add one dot in the legend for each name.
+  svg.selectAll("mydots")
+    .data(categories)
+    .enter()
+    .append("circle")
+      .attr("cx", 550)
+      .attr("cy", function(d,i){ return 30 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+      .attr("r", 7)
+      .style("fill", function(d){ return labelColor(d)})
+
+  // Add one dot in the legend for each name.
+  svg.selectAll("mylabels")
+    .data(categories)
+    .enter()
+    .append("text")
+      .attr("x", 565)
+      .attr("y", function(d,i){ return 30 + i*25}) // 100 is where the first dot appears. 25 is the distance between dots
+      .style("fill", function(d){ return labelColor(d)})
+      .text(function(d){ return d})
+      .attr("text-anchor", "left")
+      .style("alignment-baseline", "middle")
+
+</script>
