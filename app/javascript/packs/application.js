@@ -11,6 +11,11 @@ require("channels")
 // Import custom Javascript.
 require("packs/forms")
 
+// Create JS charts.
+require("d3")
+import * as d3 from "d3"
+window.d3 = d3
+
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets

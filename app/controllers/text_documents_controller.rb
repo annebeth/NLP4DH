@@ -32,6 +32,10 @@ class TextDocumentsController < ApplicationController
     redirect_to text_documents_path, alert: @text_document.file_name + " has been destroyed."
   end
 
+  def analyze
+    @text_document = TextDocument.find(params[:id])
+  end
+
   private
     def text_document_params
       params.require(:text_document).permit(:file_name, :description, :file_content, :annotation, :textfile)

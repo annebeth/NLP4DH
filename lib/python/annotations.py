@@ -1,3 +1,4 @@
+import re
 import en_core_web_sm
 
 # TODO: Add a model for SRL.
@@ -8,6 +9,9 @@ nlp = en_core_web_sm.load()
 def annotate(text, id):
     # Start a token counter for this textfile.
     token_counter = 0
+
+    # Remove whitespace from the text.
+    text = re.sub(r'(\t|\n)+', ' ', text)
 
     # Process the text with Spacy.
     doc = nlp(text)

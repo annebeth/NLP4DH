@@ -35,9 +35,11 @@
                   <td scope="row"><%= text_document.file_name %></td>
                   <td class="button-cell">
                     <%# TODO: Disable button when no annotation available yet. %>
-                    <%= link_to "Analyze", "/#", class: "btn btn-success", type: "button" %>
+                    <%= link_to "Analyze", analyze_text_document_path(text_document), class: "btn btn-success", type: "button" %>
                     <%= link_to "View", text_document_path(text_document), class: "btn btn-primary", type: "button" %>
-                    <%= button_to "Delete",  text_document, method: :delete, class: "btn btn-danger", form_class: "td-form", confirm: "Are you sure that you wish to delete #{text_document.file_name}?", type: "button" %>
+                    <%= button_to "Delete",  text_document, method: :delete, class: "btn btn-danger",
+                            form_class: "td-form", confirm: "Are you sure that you wish to delete #{text_document.file_name}?",
+                            type: "button" %>
                   </td>
             <% end %>
           </tbody>
