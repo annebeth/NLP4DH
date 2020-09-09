@@ -5,7 +5,7 @@
       <div class="card bg-light mb-3">
         <div class="card-header">
           <%= link_to text_documents_path, class: "btn btn-outline-secondary back-button", type: "button"  do %>
-              <%= fa_icon "arrow-left fa-4x" %>
+              <%= fa_icon "arrow-left", "aria-hidden": "true", title: "Back" %>
           <% end %>
           <span><b><%= @text_document.file_name %></b></span>
         </div>

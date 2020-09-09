@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10 analysis-col">
-      <% if @text_document.annotation.empty? %>
+      <% if @text_document.annotation == "{}" %>
         <div class="alert alert-danger" role="alert">
           Your file has not been annotated yet. Please wait for a few minutes
           and then refresh this page. Thank you!
@@ -15,7 +15,7 @@
       <div class="card bg-light mb-3">
         <div class="card-header">
           <%= link_to text_documents_path, class: "btn btn-outline-secondary back-button", type: "button"  do %>
-              <%= fa_icon "arrow-left fa-4x" %>
+              <%= fa_icon "arrow-left fa-4x", "aria-hidden": "true", title: "Back" %>
           <% end %>
           <span> Named Entity Recognition (NER) for <b><%= @text_document.file_name %></b></span>
           <%= link_to "View " + @text_document.file_name, text_document_path(@text_document), class: "btn btn-outline-secondary float-right"%>
@@ -44,6 +44,7 @@
 <script>
 
   var data = <%= raw extract_top_10_ner(@text_document.annotation) %>
+
   data.sort(function(x, y){
     return d3.descending(x.count, y.count);
   })

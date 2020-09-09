@@ -16,7 +16,7 @@
           </p>
           <p class="card-text">
             <%= link_to new_text_document_path, class: "btn btn-primary" do %>
-                <%= fa_icon "plus" %>
+                <%= fa_icon "upload", "aria-hidden": "true", title: "Upload" %>
             <% end %>
           </p>
         </div>
@@ -39,15 +39,15 @@
                   <td scope="row"><%= text_document.file_name %></td>
                   <td class="button-cell">
                     <%= link_to analyze_text_document_path(text_document), class: "btn btn-success", type: "button"  do %>
-                        <%= fa_icon "bar-chart" %> <span>Analyze</span>
+                        <%= fa_icon "bar-chart", "aria-hidden": "true", title: "Analyze"%> <span>Analyze</span>
                     <% end %>
                     <%= link_to text_document_path(text_document), class: "btn btn-primary", type: "button"  do %>
-                        <%= fa_icon "file-text" %> <span>View</span>
+                        <%= fa_icon "file-text", "aria-hidden": "true", title: "View" %> <span>View</span>
                     <% end %>
                     <%= button_to text_document, method: :delete, class: "btn btn-danger",
                             form_class: "td-form", confirm: "Are you sure that you wish to delete #{text_document.file_name}?",
                             type: "button" do %>
-                        <%= fa_icon "trash" %>
+                        <%= fa_icon "trash", "aria-hidden": "true", title: "Delete" %>
                     <% end %>
                   </td>
             <% end %>

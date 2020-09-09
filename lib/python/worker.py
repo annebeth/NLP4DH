@@ -29,9 +29,16 @@ if __name__ == '__main__':
                 if "class" in job and job["class"] == "Annotator":
                     text_document_id = job["args"][0]
 
-                    c.execute('''SELECT file_content FROM text_documents
-                                WHERE text_documents.id = %s;''', (text_document_id,))
-                    file_content = c.fetchone()[0]
+                    try:
+                        c.execute('''SELECT file_content FROM text_documents
+                                    WHERE text_documents.id = %s;''', (text_document_id,))
+                        file_content = c.fetchone()[0]
+                    except:
+                        print("Job id not present in db. Could not be processed.")
+                        # Remove the job from the queue if it is no longer in db.
+                        queue.remove(job_ref)
+                        break
+
                     annotation = annotate(file_content, text_document_id)
 
                     annotation_json = json.dumps(annotation, indent=4)
