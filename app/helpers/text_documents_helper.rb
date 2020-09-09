@@ -22,7 +22,7 @@ module TextDocumentsHelper
     end
 
     sorted = long_array.sort_by { |k| -k["count"] }
-    sorted[0..10].to_json
+    sorted[0..9].to_json
 
   end
 end

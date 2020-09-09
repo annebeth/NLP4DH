@@ -1,28 +1,25 @@
 <%= render 'layouts/flash' %>
 <div class="container">
-  <div class="col-md-6">
-    <table class = "table table-bordered table-striped">
-       <!-- <thead>
-          <tr>
-             <th> Header </th>
-          </tr>
-       </thead> -->
-
-       <tbody>
-         <tr>
-           <td>File name</td>
-           <td><%= @text_document.file_name %></td>
-          </tr>
-         <tr>
-           <td>Description</td>
-           <td><%= @text_document.description %></td>
-         </tr>
-         <tr>
-           <td>Text</td>
-           <td><%= simple_format @text_document.file_content %></td>
-         </tr>
-       </tbody>
-
-    </table>
+  <div class="row">
+    <div class="col-md-10 show-col">
+      <div class="card bg-light mb-3">
+        <div class="card-header">
+          <%= link_to text_documents_path, class: "btn btn-outline-secondary back-button", type: "button"  do %>
+              <%= fa_icon "arrow-left fa-4x" %>
+          <% end %>
+          <span><b><%= @text_document.file_name %></b></span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">File description</h5>
+          <p class="card-text">
+            <%= @text_document.description %>
+          </p>
+          <h5 class="card-title">File text</h5>
+          <p class="card-text">
+            <%= simple_format @text_document.file_content %>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

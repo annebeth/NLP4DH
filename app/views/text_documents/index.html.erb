@@ -5,16 +5,20 @@
       <div class="card bg-light instructions-card">
         <div class="card-body">
           <h5 class="card-title">
-            Lorem ipsum things etc.
+            Text analysis with Natural Language Processing
           </h5>
           <p class="card-text">
-            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+            Analyze your text files with the latest Natural Language Processing (NLP) models, without writing any code.
+            At the moment, only Named Entity Recognition is supported, but more options will be added soon!
           </p>
           <p class="card-text">
-            Instead of analyzing an existing file, you can also upload your own file below. Once it is ready, it is ready it will
-            become available in the table.
+            Instead of analyzing an existing file, you can also upload your own <b>.txt</b> file below.
           </p>
-          <p class="card-text"><%= link_to "New", new_text_document_path, class: "btn btn-primary"%></p>
+          <p class="card-text">
+            <%= link_to new_text_document_path, class: "btn btn-primary" do %>
+                <%= fa_icon "plus" %>
+            <% end %>
+          </p>
         </div>
       </div>
     </div>
@@ -25,7 +29,7 @@
           <thead>
             <tr>
                <th scope="col">Name</th>
-               <th scope="col"> </th>
+               <th scope="col">Actions</th>
             </tr>
           </thead>
 
@@ -34,12 +38,17 @@
                <tr>
                   <td scope="row"><%= text_document.file_name %></td>
                   <td class="button-cell">
-                    <%# TODO: Disable button when no annotation available yet. %>
-                    <%= link_to "Analyze", analyze_text_document_path(text_document), class: "btn btn-success", type: "button" %>
-                    <%= link_to "View", text_document_path(text_document), class: "btn btn-primary", type: "button" %>
-                    <%= button_to "Delete",  text_document, method: :delete, class: "btn btn-danger",
+                    <%= link_to analyze_text_document_path(text_document), class: "btn btn-success", type: "button"  do %>
+                        <%= fa_icon "bar-chart" %> <span>Analyze</span>
+                    <% end %>
+                    <%= link_to text_document_path(text_document), class: "btn btn-primary", type: "button"  do %>
+                        <%= fa_icon "file-text" %> <span>View</span>
+                    <% end %>
+                    <%= button_to text_document, method: :delete, class: "btn btn-danger",
                             form_class: "td-form", confirm: "Are you sure that you wish to delete #{text_document.file_name}?",
-                            type: "button" %>
+                            type: "button" do %>
+                        <%= fa_icon "trash" %>
+                    <% end %>
                   </td>
             <% end %>
           </tbody>

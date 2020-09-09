@@ -116,7 +116,19 @@
   margin-top: 15px;
 }
 
-/* analysis info table */
-.analysis-col {
+/* main column centering */
+.analysis-col, .show-col {
   margin: auto;
+}
+
+.chart_bar {
+  color: black;
+}
+
+i.fa + span {
+  margin-left: 3px;
+}
+
+.back-button + span {
+  margin-left: 15px;
 }
