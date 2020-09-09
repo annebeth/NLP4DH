@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6" id="text-document-form">
-      <h1> Annotate a new text </h1>
+      <h1> Upload a new text </h1>
       <%= form_with model: @text_document, local: true, html: {class: "needs-validation", novalidate: true} do |f| %>
         <%= render 'shared/errors' %>
         <div class="form-group">
@@ -17,7 +17,7 @@
             Please add a short description of the text.
           </div>
         </div>
-        <%= f.submit "Create", class: "btn btn-primary" %>
+        <%= f.submit "Submit", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>

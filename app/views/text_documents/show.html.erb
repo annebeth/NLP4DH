@@ -16,7 +16,7 @@
           </p>
           <h5 class="card-title">File text</h5>
           <p class="card-text">
-            <%= simple_format @text_document.file_content %>
+            <%= simple_format(html_escape @text_document.file_content, sanitize: false) %>
           </p>
         </div>
       </div>

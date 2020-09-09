@@ -15,8 +15,8 @@
             Instead of analyzing an existing file, you can also upload your own <b>.txt</b> file below.
           </p>
           <p class="card-text">
-            <%= link_to new_text_document_path, class: "btn btn-primary" do %>
-                <%= fa_icon "upload", "aria-hidden": "true", title: "Upload" %>
+            <%= link_to new_text_document_path, class: "btn btn-primary", type: "button" do %>
+                <%= fa_icon "upload", "aria-hidden": "true", title: "Upload" %> <span>Upload</span>
             <% end %>
           </p>
         </div>
